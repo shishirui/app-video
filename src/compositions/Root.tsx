@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition } from "remotion";
-import { getCompositionDimensions } from "./AppPromotion.js";
+import { getCompositionDimensions } from "../utils/dimensions.js";
 import { AppVideoConfig, AspectRatio } from "../config/schema.js";
 import { getTemplate } from "../templates/index.js";
 

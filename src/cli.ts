@@ -41,10 +41,6 @@ async function main() {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    // 不需要下载图片，直接使用配置文件中的 URL
-    // Remotion 的 <Img> 组件可以直接加载远程图片
-    console.log("\n✅ 使用远程图片 URL（无需下载）");
-
     // 将处理后的完整配置保存到输出目录中，供 Remotion 使用
     // 这样可以复用已验证和填充默认值后的配置，而不是每次都重新处理原始配置
     const processedConfigPath = path.join(outputDir, ".processed-config.json");

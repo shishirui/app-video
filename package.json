@@ -10,8 +10,7 @@
     "generate": "node dist/cli.js",
     "render": "node dist/render.js",
     "type-check": "tsc --noEmit",
-    "preview": "remotion studio src/index.tsx",
-    "studio": "remotion studio src/index.tsx"
+    "preview": "remotion studio src/index.tsx"
   },
   "dependencies": {
     "remotion": "^4.0.0",

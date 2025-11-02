@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, getInputProps, staticFile } from "remotion";
-import { getCompositionDimensions } from "./compositions/AppPromotion.js";
+import { getCompositionDimensions } from "./utils/dimensions.js";
 import { AppVideoConfig } from "./config/schema.js";
 import { getTemplate } from "./templates/index.js";
 import exampleConfig from "../configs/example.json";

@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 import { execSync } from "child_process";
 import { AppVideoConfig, AspectRatio } from "./config/schema.js";
-import { getCompositionDimensions } from "./compositions/AppPromotion.js";
+import { getCompositionDimensions } from "./utils/dimensions.js";
 
 interface RenderOptions {
   configPath: string;

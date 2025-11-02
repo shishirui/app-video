@@ -1,5 +1,5 @@
 import { getCompositions } from "remotion";
-import { AppPromotionVideo, getCompositionDimensions } from "./dist/compositions/AppPromotion.js";
+import { getCompositionDimensions } from "./dist/utils/dimensions.js";
 
 export const getCompositions = async () => {
   return [

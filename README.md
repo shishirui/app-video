@@ -82,7 +82,7 @@ npm run generate configs/example.json
 本项目提供了可视化的预览和调试界面，可以实时查看视频效果：
 
 ```bash
-npx remotion studio src/index.tsx
+npm run preview
 ```
 
 在 Studio 中你可以：

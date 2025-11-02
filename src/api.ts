@@ -18,7 +18,7 @@ import {
   formatBytes,
   getOutputFilename,
 } from "./utils/download.js";
-import { AppPromotionVideo, getCompositionDimensions } from "./compositions/AppPromotion.js";
+import { getCompositionDimensions } from "./utils/dimensions.js";
 
 /**
  * 完整工作流示例
@@ -167,4 +167,4 @@ export * from "./config/schema.js";
 export * from "./config/loader.js";
 export * from "./render.js";
 export * from "./utils/download.js";
-export * from "./compositions/AppPromotion.js";
+export * from "./utils/dimensions.js";
