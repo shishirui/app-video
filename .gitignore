@@ -10,3 +10,4 @@ outputs/
 *.swo
 *~
 .vscode/settings.json
+.temp-config.json

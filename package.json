@@ -9,7 +9,8 @@
     "dev": "tsc --watch",
     "generate": "node dist/cli.js",
     "render": "node dist/render.js",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "preview": "remotion studio"
   },
   "dependencies": {
     "remotion": "^4.0.0",

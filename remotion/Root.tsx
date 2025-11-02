@@ -1,11 +1,24 @@
 import React from "react";
-import { Composition, Still } from "remotion";
-import { AppPromotionVideo, getCompositionDimensions } from "../src/compositions/AppPromotion.js";
+import { Composition } from "remotion";
+import { AppPromotionVideo, getCompositionDimensions } from "../src/compositions/AppPromotion";
 
-export const RemotionRoot: React.FC<{ config?: any; aspectRatio?: string }> = ({
-  config = {},
-  aspectRatio = "9x16",
-}) => {
+// 示例配置
+const exampleConfig = {
+  appName: "Tube PiP",
+  icon: "https://tubepip.com/static/images/logo.webp",
+  qr: "https://www.pgyer.com/app/qrcode/oooplay",
+  theme: {
+    brandColor: "#3B82F6",
+    backgroundColor: "#FFFFFF"
+  },
+  fps: 30,
+  duration: 8,
+  locale: "zh-CN",
+  output: ["9x16", "1x1", "16x9"],
+  voiceover: false,
+};
+
+export const RemotionRoot: React.FC = () => {
   const aspects = ["9x16", "1x1", "16x9"] as const;
 
   return (
@@ -22,16 +35,7 @@ export const RemotionRoot: React.FC<{ config?: any; aspectRatio?: string }> = ({
             width={dims.width}
             height={dims.height}
             defaultProps={{
-              config: config || {
-                appName: "Test App",
-                icon: "",
-                qr: "",
-                fps: 30,
-                duration: 8,
-                locale: "zh-CN",
-                output: ["9x16", "1x1", "16x9"],
-                voiceover: false,
-              },
+              config: exampleConfig,
               aspectRatio: aspect,
             }}
           />
@@ -40,3 +44,6 @@ export const RemotionRoot: React.FC<{ config?: any; aspectRatio?: string }> = ({
     </>
   );
 };
+
+// 必须使用默认导出
+export default RemotionRoot;
