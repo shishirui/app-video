@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import { loadConfig } from "./config/loader.js";
 import { downloadImages } from "./utils/download.js";
-import { renderAppVideo, optimizeWithFFmpeg } from "./render.js";
+import { renderAppVideoWithCLI, optimizeWithFFmpeg } from "./render-api.js";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -50,13 +50,19 @@ async function main() {
       const imageMapping = await downloadImages(allUrls);
 
       // 更新配置中的本地路径
-      config.screens = config.screens.map((url) => imageMapping.get(url) || url);
+      // 注意：保持本地文件路径，由组件负责处理
+      config.screens = config.screens.map((url) => {
+        const localPath = imageMapping.get(url) || url;
+        return localPath;
+      });
       config.qr = imageMapping.get(config.qr) || config.qr;
+      
+      console.log(`✅ 下载完成: ${config.screens.length} 张截图`);
     }
 
     // 执行渲染
     console.log("\n🎨 开始渲染视频...");
-    const renderResults = await renderAppVideo(config, {
+    const renderResults = await renderAppVideoWithCLI(config, {
       configPath,
       outputDir,
       qualities: "high",

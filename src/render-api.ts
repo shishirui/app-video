@@ -1,6 +1,7 @@
+import { bundle } from "@remotion/bundler";
 import path from "path";
-import { execSync } from "child_process";
 import fs from "fs";
+import { execSync } from "child_process";
 import { AppVideoConfig, AspectRatio } from "./config/schema.js";
 import { getCompositionDimensions } from "./compositions/AppPromotion.js";
 
@@ -19,24 +20,25 @@ export interface RenderResult {
   size: number;
 }
 
-export async function renderAppVideo(
+export async function renderAppVideoWithCLI(
   config: AppVideoConfig,
   options: RenderOptions
 ): Promise<RenderResult[]> {
   const results: RenderResult[] = [];
 
-  // 处理每个宽高比
-  for (const aspectRatio of config.output) {
-    const dimensions = getCompositionDimensions(aspectRatio);
-    const outputFilename = `${config.appName}_${aspectRatio}.mp4`;
-    const outputPath = path.join(options.outputDir, outputFilename);
+  try {
+    // 为每个宽高比渲染视频
+    for (const aspectRatio of config.output) {
+      const dimensions = getCompositionDimensions(
+        aspectRatio as "9x16" | "1x1" | "16x9"
+      );
+      const outputFilename = `${config.appName}_${aspectRatio}.mp4`;
+      const outputPath = path.join(options.outputDir, outputFilename);
 
-    console.log(
-      `📹 渲染 ${aspectRatio} (${dimensions.width}x${dimensions.height})...`
-    );
+      console.log(
+        `📹 渲染 ${aspectRatio} (${dimensions.width}x${dimensions.height})...`
+      );
 
-    try {
-      // 使用 Remotion CLI 进行渲染
       const qualitySettings = {
         low: "28",
         medium: "23",
@@ -45,10 +47,19 @@ export async function renderAppVideo(
 
       const crf = qualitySettings[options.qualities || "high"];
 
-      // 构建 Remotion render 命令
+      // 使用 npx remotion render 命令
+      const entryFile = path.join(process.cwd(), "dist", "index-entry.js");
+      const compositionId = `AppPromotionVideo-${aspectRatio}`;
+      
+      // 将配置保存到临时文件
+      const tempConfigFile = path.join(process.cwd(), ".temp-config.json");
+      const tempConfig = { config, aspectRatio };
+      fs.writeFileSync(tempConfigFile, JSON.stringify(tempConfig));
+      
       const command = [
         "npx remotion render",
-        `--composition=AppPromotionVideo_${aspectRatio}`,
+        entryFile,
+        compositionId,
         `--codec=${options.codec || "h264"}`,
         `--crf=${crf}`,
         `--pixel-format=yuv420p`,
@@ -56,31 +67,35 @@ export async function renderAppVideo(
         `--fps=${config.fps}`,
         `--width=${dimensions.width}`,
         `--height=${dimensions.height}`,
-        `--duration=${config.duration}`,
         `"${outputPath}"`,
       ].join(" ");
 
-      console.log(`运行: ${command.substring(0, 80)}...`);
-
-      // 执行 Remotion 渲染命令
-      execSync(command, { stdio: "inherit" });
-
-      const stats = fs.statSync(outputPath);
-
-      results.push({
-        aspectRatio,
-        videoPath: outputPath,
-        duration: config.duration,
-        size: stats.size,
-      });
-
       console.log(
-        `✅ 完成: ${outputFilename} (${Math.round(stats.size / 1024 / 1024)}MB)`
+        `运行: npx remotion render --composition=${compositionId} ...`
       );
-    } catch (error) {
-      console.warn(`⚠️  渲染 ${aspectRatio} 时出错`);
-      throw error;
+
+      try {
+        execSync(command, { stdio: "inherit" });
+
+        const stats = fs.statSync(outputPath);
+        results.push({
+          aspectRatio: aspectRatio as AspectRatio,
+          videoPath: outputPath,
+          duration: config.duration,
+          size: stats.size,
+        });
+
+        console.log(
+          `✅ 完成: ${outputFilename} (${Math.round(stats.size / 1024 / 1024)}MB)`
+        );
+      } catch (error) {
+        console.warn(`⚠️  渲染 ${aspectRatio} 时出错:`, error);
+        throw error;
+      }
     }
+  } catch (error) {
+    console.error("❌ 渲染过程中出错:", error);
+    throw error;
   }
 
   return results;
@@ -94,8 +109,6 @@ export async function optimizeWithFFmpeg(
     preset?: "fast" | "medium" | "slow";
   }
 ): Promise<void> {
-  const { execSync } = await import("child_process");
-
   const preset = options?.preset || "medium";
   const bitrate = options?.bitrate || "2M";
 
@@ -113,7 +126,7 @@ export async function optimizeWithFFmpeg(
     "aac",
     "-b:a",
     "128k",
-    "-y", // 覆盖输出文件
+    "-y",
     `"${outputPath}"`,
   ].join(" ");
 

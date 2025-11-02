@@ -145,7 +145,7 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
           zIndex: 5,
         }}
       >
-        {config.screens.slice(0, 3).map((screen, idx) => (
+        {config.screens && config.screens.slice(0, 3).map((screen, idx) => (
           <div
             key={idx}
             style={{
@@ -155,9 +155,25 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
               overflow: "hidden",
               boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
               transform: `translateY(${Math.sin(frame * 0.02 + idx) * 10}px)`,
+              backgroundColor: "#f0f0f0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <Img src={screen} style={{ width: "100%", height: "100%" }} />
+            {screen && screen.length > 0 ? (
+              <Img src={screen} style={{ width: "100%", height: "100%" }} />
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#999",
+                  fontSize: "12px",
+                }}
+              >
+                screenshot
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -227,16 +243,31 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
             backgroundColor: "white",
             borderRadius: `${width * 0.02}px`,
             boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Img
-            src={config.qr}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-          />
+          {config.qr && config.qr.length > 0 ? (
+            <Img
+              src={config.qr}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                color: "#999",
+                fontSize: "12px",
+              }}
+            >
+              QR Code
+            </div>
+          )}
         </div>
         <p
           style={{
