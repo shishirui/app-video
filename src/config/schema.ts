@@ -10,8 +10,9 @@ export const ThemeSchema = z.object({
 
 export const AppVideoConfigSchema = z.object({
   appName: z.string().describe("应用名称"),
-  tagline: z.string().describe("应用标语"),
-  features: z.array(z.string()).describe("应用特性列表，最多 3-5 个"),
+  icon: z.union([z.string().url(), z.literal("")]).optional().default("").describe("应用图标 URL"),
+  tagline: z.string().optional().default("").describe("应用标语"),
+  features: z.array(z.string()).optional().default([]).describe("应用特性列表，最多 3-5 个"),
   screens: z.array(z.string().url()).optional().default([]).describe("应用截图 URL 列表"),
   qr: z.union([z.string().url(), z.literal("")]).optional().default("").describe("二维码图片 URL"),
   theme: ThemeSchema.optional(),

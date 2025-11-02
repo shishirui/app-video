@@ -16,18 +16,15 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
   const duration = config.duration * fps;
 
   // 动画时间点
-  const titleStartFrame = fps * 0.5;
-  const titleEndFrame = fps * 2;
-  const featuresStartFrame = fps * 2.5;
-  const featuresEndFrame = fps * 5;
-  const qrStartFrame = fps * 5.5;
-  const qrEndFrame = fps * 8;
+  const iconStartFrame = fps * 0.3;
+  const titleStartFrame = fps * 0.8;
+  const qrStartFrame = fps * 1.5;
 
   // 淡入淡出动画
-  const titleOpacity = interpolate(
+  const iconOpacity = interpolate(
     frame,
-    [titleStartFrame - fps * 0.5, titleStartFrame, titleEndFrame],
-    [0, 1, 1],
+    [iconStartFrame - fps * 0.3, iconStartFrame],
+    [0, 1],
     {
       easing: Easing.inOut(Easing.ease),
       extrapolateLeft: "clamp",
@@ -35,10 +32,21 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
     }
   );
 
-  const featuresOpacity = interpolate(
+  const iconScale = interpolate(
     frame,
-    [featuresStartFrame - fps * 0.3, featuresStartFrame, featuresEndFrame],
-    [0, 1, 1],
+    [iconStartFrame - fps * 0.3, iconStartFrame],
+    [0.8, 1],
+    {
+      easing: Easing.out(Easing.back(1.5)),
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  const titleOpacity = interpolate(
+    frame,
+    [titleStartFrame - fps * 0.3, titleStartFrame],
+    [0, 1],
     {
       easing: Easing.inOut(Easing.ease),
       extrapolateLeft: "clamp",
@@ -48,8 +56,8 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
 
   const qrOpacity = interpolate(
     frame,
-    [qrStartFrame - fps * 0.3, qrStartFrame, qrEndFrame],
-    [0, 1, 1],
+    [qrStartFrame - fps * 0.3, qrStartFrame],
+    [0, 1],
     {
       easing: Easing.inOut(Easing.ease),
       extrapolateLeft: "clamp",
@@ -94,12 +102,62 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
         }}
       />
 
-      {/* 标题部分 */}
+      {/* 应用图标 */}
+      <div
+        style={{
+          opacity: iconOpacity,
+          transform: `scale(${iconScale})`,
+          position: "absolute",
+          top: `${height * 0.2}px`,
+          left: 0,
+          right: 0,
+          display: "flex",
+          justifyContent: "center",
+          zIndex: 10,
+        }}
+      >
+        <div
+          style={{
+            width: `${width * 0.35}px`,
+            height: `${width * 0.35}px`,
+            borderRadius: `${width * 0.08}px`,
+            overflow: "hidden",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.25)",
+            backgroundColor: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {config.icon && config.icon.length > 0 ? (
+            <Img
+              src={config.icon}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                color: "#999",
+                fontSize: "24px",
+              }}
+            >
+              Icon
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 应用名称 */}
       <div
         style={{
           opacity: titleOpacity,
           position: "absolute",
-          top: `${height * 0.1}px`,
+          top: `${height * 0.5}px`,
           left: 0,
           right: 0,
           textAlign: "center",
@@ -108,124 +166,24 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
       >
         <h1
           style={{
-            fontSize: Math.min(width * 0.12, 72),
+            fontSize: Math.min(width * 0.14, 80),
             fontWeight: "bold",
             color: theme.brandColor,
             margin: 0,
             lineHeight: 1.2,
+            textShadow: "0 2px 8px rgba(0,0,0,0.1)",
           }}
         >
           {config.appName}
         </h1>
-        <p
-          style={{
-            fontSize: Math.min(width * 0.06, 40),
-            color: "#666666",
-            margin: `${height * 0.02}px 0 0 0`,
-            fontWeight: 500,
-          }}
-        >
-          {config.tagline}
-        </p>
       </div>
 
-      {/* 应用截图走廊 */}
-      <div
-        style={{
-          opacity: featuresOpacity,
-          position: "absolute",
-          top: `${height * 0.28}px`,
-          left: 0,
-          right: 0,
-          display: "flex",
-          justifyContent: "center",
-          gap: `${width * 0.05}px`,
-          paddingLeft: `${width * 0.05}px`,
-          paddingRight: `${width * 0.05}px`,
-          zIndex: 5,
-        }}
-      >
-        {config.screens && config.screens.slice(0, 3).map((screen, idx) => (
-          <div
-            key={idx}
-            style={{
-              width: `${width * 0.25}px`,
-              aspectRatio: "9/16",
-              borderRadius: `${width * 0.03}px`,
-              overflow: "hidden",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-              transform: `translateY(${Math.sin(frame * 0.02 + idx) * 10}px)`,
-              backgroundColor: "#f0f0f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {screen && screen.length > 0 ? (
-              <Img src={screen} style={{ width: "100%", height: "100%" }} />
-            ) : (
-              <div
-                style={{
-                  textAlign: "center",
-                  color: "#999",
-                  fontSize: "12px",
-                }}
-              >
-                screenshot
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* 特性列表 */}
-      <div
-        style={{
-          opacity: featuresOpacity,
-          position: "absolute",
-          top: `${height * 0.65}px`,
-          left: `${width * 0.1}px`,
-          right: `${width * 0.1}px`,
-          zIndex: 5,
-        }}
-      >
-        {config.features.slice(0, 3).map((feature, idx) => (
-          <div
-            key={idx}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: `${height * 0.04}px`,
-            }}
-          >
-            <div
-              style={{
-                width: `${width * 0.04}px`,
-                height: `${width * 0.04}px`,
-                borderRadius: "50%",
-                backgroundColor: theme.brandColor,
-                marginRight: `${width * 0.03}px`,
-              }}
-            />
-            <span
-              style={{
-                fontSize: Math.min(width * 0.05, 32),
-                color: "#333333",
-                fontWeight: 500,
-              }}
-            >
-              {feature}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* 二维码和下载提示 */}
+      {/* 二维码 */}
       <div
         style={{
           opacity: qrOpacity,
           position: "absolute",
-          bottom: `${height * 0.1}px`,
+          bottom: `${height * 0.15}px`,
           left: 0,
           right: 0,
           display: "flex",
@@ -237,12 +195,12 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
       >
         <div
           style={{
-            width: `${width * 0.25}px`,
+            width: `${width * 0.3}px`,
             aspectRatio: "1",
-            padding: `${width * 0.01}px`,
+            padding: `${width * 0.02}px`,
             backgroundColor: "white",
-            borderRadius: `${width * 0.02}px`,
-            boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+            borderRadius: `${width * 0.03}px`,
+            boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -262,7 +220,7 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
               style={{
                 textAlign: "center",
                 color: "#999",
-                fontSize: "12px",
+                fontSize: "14px",
               }}
             >
               QR Code
@@ -271,13 +229,14 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
         </div>
         <p
           style={{
-            fontSize: Math.min(width * 0.05, 28),
+            fontSize: Math.min(width * 0.055, 32),
             color: theme.brandColor,
             fontWeight: "bold",
             margin: 0,
+            textShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
         >
-          立即下载
+          扫码下载
         </p>
       </div>
     </AbsoluteFill>

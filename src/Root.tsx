@@ -6,6 +6,7 @@ import { AppVideoConfig } from "./config/schema.js";
 // 默认配置 
 const DEFAULT_CONFIG: AppVideoConfig = {
   appName: "示例应用",
+  icon: "",
   tagline: "示例应用标语",
   screens: [],
   qr: "",

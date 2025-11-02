@@ -33,6 +33,7 @@ export function saveConfig(config: AppVideoConfig, outputPath: string): void {
 export function createDefaultConfig(): AppVideoConfig {
   return {
     appName: "My App",
+    icon: "",
     tagline: "Amazing features await",
     features: ["Feature 1", "Feature 2", "Feature 3"],
     screens: [],

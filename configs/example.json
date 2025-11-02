@@ -1,12 +1,6 @@
 {
   "appName": "Tube PiP",
-  "tagline": "无广告·后台播放·画中画",
-  "features": ["一键浮窗", "支持第三方视频", "省电不卡顿"],
-  "screens": [
-    "https://tubepip.com/static/images/1.png",
-    "https://tubepip.com/static/images/2.png",
-    "https://tubepip.com/static/images/3.png"
-  ],
+  "icon": "https://tubepip.com/static/images/logo.webp",
   "qr": "https://www.pgyer.com/app/qrcode/oooplay",
   "theme": {
     "brandColor": "#3B82F6",
