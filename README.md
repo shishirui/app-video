@@ -16,83 +16,22 @@
 
 ### 1. 安装依赖
 
-\`\`\`bash
+```bash
 npm install
 npm run build
-\`\`\`
+```
 
-### 2. 准备配置文件
+### 2. 生成视频
 
-创建配置文件 \`config.json\`:
+```bash
+npm run generate configs/example.json
+```
 
-\`\`\`json
-{
-  "appName": "MyApp",
-  "tagline": "应用标语/副标题",
-  "features": ["特性一", "特性二", "特性三"],
-  "screens": [
-    "https://example.com/screen1.png",
-    "https://example.com/screen2.png",
-    "https://example.com/screen3.png"
-  ],
-  "qr": "https://example.com/qr.png",
-  "theme": {
-    "brandColor": "#3B82F6",
-    "backgroundColor": "#FFFFFF"
-  },
-  "locale": "zh-CN",
-  "output": ["9x16", "1x1", "16x9"],
-  "duration": 8,
-  "fps": 30
-}
-\`\`\`
-
-### 3. 生成视频
-
-\`\`\`bash
-npm run generate config.json
-\`\`\`
-
-输出文件保存在 \`outputs/{appName}/\` 目录下。
-
-## ⚙️ 配置说明
-
-### 必需字段
-
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| \`appName\` | string | 应用名称 |
-| \`tagline\` | string | 应用标语或副标题 |
-| \`features\` | string[] | 应用特性列表 (建议 3-5 个) |
-| \`screens\` | string[] | 应用截图 URL 列表 |
-| \`qr\` | string | 二维码图片 URL |
-
-### 可选字段
-
-| 字段 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| \`theme\` | object | 见下 | 主题配置 (品牌色、背景色) |
-| \`locale\` | string | "zh-CN" | 语言: "zh-CN" 或 "en-US" |
-| \`output\` | string[] | ["9x16", "1x1", "16x9"] | 输出宽高比 |
-| \`duration\` | number | 8 | 视频时长 (秒) |
-| \`fps\` | number | 30 | 帧率 |
-| \`voiceover\` | boolean | false | 是否包含旁白 |
-
-### 主题配置
-
-\`\`\`json
-{
-  "theme": {
-    "brandColor": "#3B82F6",
-    "backgroundColor": "#FFFFFF",
-    "accentColor": "#F59E0B"
-  }
-}
-\`\`\`
+输出文件保存在 `outputs/{appName}/` 目录下。
 
 ## 📂 项目结构
 
-\`\`\`
+```
 .
 ├── src/
 │   ├── cli.ts              # 命令行入口
@@ -111,37 +50,29 @@ npm run generate config.json
 │   └── weibo.json
 ├── outputs/                # 生成的视频输出目录
 └── package.json
-\`\`\`
+```
 
-## 🔧 可用命令
+## 🐛 调试方式
 
-\`\`\`bash
-# 编译 TypeScript
-npm run build
+Remotion Studio 提供了可视化的预览和调试界面，可以实时查看视频效果：
 
-# 监听文件变化并编译
-npm run dev
+```bash
+npm run preview
+```
+或者使用别名命令：
 
-# 生成视频
-npm run generate <config.json>
+```bash
+npm run studio
+```
 
-# 类型检查
-npm run type-check
-\`\`\`
+在 Studio 中你可以：
+- 📹 实时预览视频效果
+- ⏯️ 控制播放进度和速度
+- 🎨 调试组件和动画
+- 📊 查看时间轴和帧信息
+- 🔄 热重载修改后的代码
 
-## 📋 示例
-
-项目已提供三个示例配置文件:
-
-- \`configs/example.json\` - 基础示例
-- \`configs/kuaishou.json\` - 快手平台配置
-- \`configs/weibo.json\` - 微博平台配置
-
-生成示例视频:
-
-\`\`\`bash
-npm run generate configs/example.json
-\`\`\`
+**提示**: 修改源代码后，Studio 会自动重新加载，无需重启。
 
 ## 📝 技术栈
 
@@ -151,14 +82,6 @@ npm run generate configs/example.json
 - **Zod** - 运行时数据验证
 - **Sharp** - 图像处理
 - **Axios** - HTTP 客户端
-
-## 📊 输出规格
-
-| 宽高比 | 分辨率 | 用途 |
-|--------|--------|------|
-| 9:16 | 1080×1920 | 竖屏 (Instagram Reel, TikTok) |
-| 1:1 | 1080×1080 | 方形 (Instagram Feed) |
-| 16:9 | 1920×1080 | 横屏 (YouTube, 电视播放) |
 
 ## 📜 License
 
