@@ -43,7 +43,9 @@ export async function downloadImages(urls: string[]): Promise<Map<string, string
       await downloadImage(url, localPath);
     }
 
-    mapping.set(url, localPath);
+    // Return relative path from project root for Remotion to serve
+    const relativePath = path.relative(process.cwd(), localPath);
+    mapping.set(url, relativePath);
   }
 
   return mapping;

@@ -1,8 +1,12 @@
 import { Config } from "@remotion/cli/config";
+import path from "path";
 
 Config.setCodec("h264");
 Config.setPixelFormat("yuv420p");
 Config.setConcurrency(4);
+
+// Set the public directory to serve static files (like cached images)
+Config.setPublicDir(path.join(process.cwd(), ".cache"));
 
 export const videoConfig = {
   fps: 30,

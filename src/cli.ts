@@ -43,22 +43,9 @@ async function main() {
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    // 如果需要，下载远程资源
-    if (config.screens.length > 0 || config.qr) {
-      console.log("\n📥 下载资源...");
-      const allUrls = [...config.screens, config.qr];
-      const imageMapping = await downloadImages(allUrls);
-
-      // 更新配置中的本地路径
-      // 注意：保持本地文件路径，由组件负责处理
-      config.screens = config.screens.map((url) => {
-        const localPath = imageMapping.get(url) || url;
-        return localPath;
-      });
-      config.qr = imageMapping.get(config.qr) || config.qr;
-      
-      console.log(`✅ 下载完成: ${config.screens.length} 张截图`);
-    }
+    // 不需要下载图片，直接使用配置文件中的 URL
+    // Remotion 的 <Img> 组件可以直接加载远程图片
+    console.log("\n✅ 使用远程图片 URL（无需下载）");
 
     // 执行渲染
     console.log("\n🎨 开始渲染视频...");
