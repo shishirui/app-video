@@ -1,5 +1,5 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, getInputProps } from "remotion";
 import { AppPromotionVideo, getCompositionDimensions } from "./compositions/AppPromotion.js";
 import { AppVideoConfig } from "./config/schema.js";
 
@@ -22,10 +22,11 @@ interface RootProps {
   aspectRatio?: "9x16" | "1x1" | "16x9";
 }
 
-export const Root: React.FC<RootProps> = ({ 
-  config = DEFAULT_CONFIG,
-  aspectRatio = "9x16",
-}) => {
+export const Root: React.FC<RootProps> = () => {
+  // 从 Remotion 的 inputProps 中获取配置
+  const inputProps = getInputProps() as { config?: AppVideoConfig } | null;
+  const config = inputProps?.config || DEFAULT_CONFIG;
+  
   const aspects: Array<"9x16" | "1x1" | "16x9"> = ["9x16", "1x1", "16x9"];
 
   return (
