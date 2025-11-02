@@ -91,7 +91,9 @@ npm run preview
 - 📊 查看时间轴和帧信息
 - 🔄 热重载修改后的代码
 
-**提示**: 修改源代码后，Studio 会自动重新加载，无需重启。在调试模式下，默认载入的是 configs/example.json 中的配置。
+提示: 
+1. 修改源代码后，Studio 会自动重新加载，无需重启。
+2. 在调试模式下，默认载入的是 configs/example.json 中的配置。
 
 ## 📝 技术栈
 
