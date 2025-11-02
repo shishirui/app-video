@@ -35,6 +35,7 @@ export function createDefaultConfig(): AppVideoConfig {
     appName: "My App",
     icon: "",
     qr: "",
+    template: "default",
     locale: "zh-CN",
     output: ["9x16", "1x1", "16x9"],
     voiceover: false,

@@ -1,14 +1,14 @@
 {
-  "appName": "Tube PiP",
+  "appName": "Modern App",
   "icon": "https://tubepip.com/static/images/logo.webp",
   "qr": "https://www.pgyer.com/app/qrcode/oooplay",
   "theme": {
-    "brandColor": "#3B82F6",
+    "brandColor": "#FF6B6B",
     "backgroundColor": "#FFFFFF"
   },
-  "template": "minimal",
+  "template": "modern",
   "locale": "zh-CN",
-  "output": ["9x16", "1x1", "16x9"],
+  "output": ["9x16"],
   "voiceover": false,
   "duration": 8,
   "fps": 30

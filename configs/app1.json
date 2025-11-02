@@ -6,6 +6,7 @@
     "brandColor": "#3B82F6",
     "backgroundColor": "#FFFFFF"
   },
+  "template": "default",
   "locale": "zh-CN",
   "output": ["9x16"],
   "voiceover": false,

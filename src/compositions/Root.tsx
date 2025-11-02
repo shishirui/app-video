@@ -1,13 +1,17 @@
 import React from "react";
 import { Composition } from "remotion";
-import { AppPromotionVideo, getCompositionDimensions } from "./AppPromotion.js";
+import { getCompositionDimensions } from "./AppPromotion.js";
 import { AppVideoConfig, AspectRatio } from "../config/schema.js";
+import { getTemplate } from "../templates/index.js";
 
 interface RootProps {
   config: AppVideoConfig;
 }
 
 export const Root: React.FC<RootProps> = ({ config }) => {
+  // 根据配置获取对应的模板组件
+  const TemplateComponent = getTemplate(config.template || "default");
+
   return (
     <>
       {config.output.map((aspectRatio) => {
@@ -17,7 +21,7 @@ export const Root: React.FC<RootProps> = ({ config }) => {
           <Composition
             key={aspectRatio}
             id={`AppPromotionVideo-${aspectRatio}`}
-            component={AppPromotionVideo as any}
+            component={TemplateComponent as any}
             durationInFrames={config.duration * config.fps}
             fps={config.fps}
             width={dimensions.width}

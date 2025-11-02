@@ -1,7 +1,8 @@
 import React from "react";
 import { Composition, getInputProps, staticFile } from "remotion";
-import { AppPromotionVideo, getCompositionDimensions } from "./compositions/AppPromotion.js";
+import { getCompositionDimensions } from "./compositions/AppPromotion.js";
 import { AppVideoConfig } from "./config/schema.js";
+import { getTemplate } from "./templates/index.js";
 import exampleConfig from "../configs/example.json";
 
 // 从 example.json 读取默认配置
@@ -28,6 +29,9 @@ export const Root: React.FC<RootProps> = () => {
     config = DEFAULT_CONFIG;
   }
   
+  // 根据配置获取对应的模板组件
+  const TemplateComponent = getTemplate(config.template || "default");
+  
   const aspects: Array<"9x16" | "1x1" | "16x9"> = ["9x16", "1x1", "16x9"];
 
   return (
@@ -39,7 +43,7 @@ export const Root: React.FC<RootProps> = () => {
           <Composition
             key={aspect}
             id={compositionId}
-            component={AppPromotionVideo as any}
+            component={TemplateComponent as any}
             durationInFrames={config.duration * config.fps}
             fps={config.fps}
             width={dims.width}
