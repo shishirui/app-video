@@ -1,0 +1,23 @@
+{
+  "appName": "微博",
+  "tagline": "热点资讯·热爱分享",
+  "features": [
+    "实时热点",
+    "互动社交",
+    "内容创作"
+  ],
+  "screens": [
+    "https://cdn.example.com/weibo/s1.png",
+    "https://cdn.example.com/weibo/s2.png",
+    "https://cdn.example.com/weibo/s3.png"
+  ],
+  "qr": "https://cdn.example.com/weibo/qr.png",
+  "theme": {
+    "brandColor": "#FF0000",
+    "backgroundColor": "#FAFAFA"
+  },
+  "locale": "zh-CN",
+  "output": ["9x16", "1x1"],
+  "duration": 8,
+  "fps": 30
+}

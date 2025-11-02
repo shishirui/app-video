@@ -1,0 +1,12 @@
+node_modules/
+dist/
+outputs/
+.cache/
+*.mp4
+*.log
+.env
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/settings.json

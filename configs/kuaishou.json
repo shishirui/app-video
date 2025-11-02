@@ -1,0 +1,23 @@
+{
+  "appName": "快手极速版",
+  "tagline": "看全球，赚现金",
+  "features": [
+    "短视频推荐",
+    "直播带货",
+    "随时提现"
+  ],
+  "screens": [
+    "https://cdn.example.com/kuaishou/s1.png",
+    "https://cdn.example.com/kuaishou/s2.png",
+    "https://cdn.example.com/kuaishou/s3.png"
+  ],
+  "qr": "https://cdn.example.com/kuaishou/qr.png",
+  "theme": {
+    "brandColor": "#FF0000",
+    "backgroundColor": "#FFFFFF"
+  },
+  "locale": "zh-CN",
+  "output": ["9x16"],
+  "duration": 10,
+  "fps": 30
+}
