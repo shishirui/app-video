@@ -1,10 +1,10 @@
 import React from "react";
 import { AbsoluteFill, Img, useCurrentFrame, interpolate, Easing, useVideoConfig } from "remotion";
-import { AppVideoConfig } from "../config/schema.js";
+import { AppVideoConfig, AspectRatio } from "../config/schema.js";
 
 interface AppPromotionVideoProps {
   config: AppVideoConfig;
-  aspectRatio: "9x16" | "1x1" | "16x9";
+  aspectRatio: AspectRatio;
 }
 
 export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
@@ -371,7 +371,7 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
   );
 };
 
-export const getCompositionDimensions = (aspectRatio: "9x16" | "1x1" | "16x9") => {
+export const getCompositionDimensions = (aspectRatio: AspectRatio) => {
   switch (aspectRatio) {
     case "9x16":
       return { width: 1080, height: 1920 };

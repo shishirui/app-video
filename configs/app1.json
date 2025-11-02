@@ -7,7 +7,7 @@
     "backgroundColor": "#FFFFFF"
   },
   "locale": "zh-CN",
-  "output": ["9x16", "1x1", "16x9"],
+  "output": ["9x16"],
   "voiceover": false,
   "duration": 8,
   "fps": 30

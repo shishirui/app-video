@@ -1,7 +1,7 @@
 import React from "react";
 import { Composition } from "remotion";
 import { AppPromotionVideo, getCompositionDimensions } from "./AppPromotion.js";
-import { AppVideoConfig } from "../config/schema.js";
+import { AppVideoConfig, AspectRatio } from "../config/schema.js";
 
 interface RootProps {
   config: AppVideoConfig;
@@ -11,9 +11,7 @@ export const Root: React.FC<RootProps> = ({ config }) => {
   return (
     <>
       {config.output.map((aspectRatio) => {
-        const dimensions = getCompositionDimensions(
-          aspectRatio as "9x16" | "1x1" | "16x9"
-        );
+        const dimensions = getCompositionDimensions(aspectRatio);
 
         return (
           <Composition
@@ -26,7 +24,7 @@ export const Root: React.FC<RootProps> = ({ config }) => {
             height={dimensions.height}
             defaultProps={{
               config,
-              aspectRatio: aspectRatio as "9x16" | "1x1" | "16x9",
+              aspectRatio,
             }}
           />
         );
