@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, useCurrentFrame, interpolate, Easing } from "remotion";
+import { AbsoluteFill, Img, useCurrentFrame, interpolate, Easing, useVideoConfig } from "remotion";
 import { AppVideoConfig } from "../config/schema.js";
 
 interface AppPromotionVideoProps {
@@ -12,6 +12,8 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
   aspectRatio,
 }) => {
   const frame = useCurrentFrame();
+  const videoConfig = useVideoConfig();
+  const { width, height } = videoConfig;
   const fps = config.fps;
   const duration = config.duration * fps;
 
@@ -101,19 +103,7 @@ export const AppPromotionVideo: React.FC<AppPromotionVideoProps> = ({
     }
   );
 
-  // 根据宽高比计算尺寸
-  const getDimensions = () => {
-    switch (aspectRatio) {
-      case "9x16":
-        return { width: 1080, height: 1920 };
-      case "1x1":
-        return { width: 1080, height: 1080 };
-      case "16x9":
-        return { width: 1920, height: 1080 };
-    }
-  };
-
-  const { width, height } = getDimensions();
+  // 使用从 useVideoConfig 获取的实际视频尺寸，而不是硬编码
   const theme = config.theme || {
     brandColor: "#3B82F6",
     backgroundColor: "#FFFFFF",

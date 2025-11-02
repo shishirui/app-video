@@ -18,7 +18,7 @@ export const Root: React.FC<RootProps> = ({ config }) => {
         return (
           <Composition
             key={aspectRatio}
-            id={`AppPromotionVideo_${aspectRatio}`}
+            id={`AppPromotionVideo-${aspectRatio}`}
             component={AppPromotionVideo as any}
             durationInFrames={config.duration * config.fps}
             fps={config.fps}

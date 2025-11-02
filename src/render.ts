@@ -48,7 +48,7 @@ export async function renderAppVideo(
       // 构建 Remotion render 命令
       const command = [
         "npx remotion render",
-        `--composition=AppPromotionVideo_${aspectRatio}`,
+        `--composition=AppPromotionVideo-${aspectRatio}`,
         `--codec=${options.codec || "h264"}`,
         `--crf=${crf}`,
         `--pixel-format=yuv420p`,
