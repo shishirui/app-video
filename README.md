@@ -73,7 +73,6 @@ npm run generate configs/example.json
 │   ├── app1.json
 │   └── modern-test.json
 ├── outputs/                # 生成的视频输出目录
-├── TEMPLATES.md            # 模板系统文档
 └── package.json
 ```
 
