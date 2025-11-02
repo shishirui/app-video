@@ -32,8 +32,6 @@ async function main() {
     const config = await loadConfig(configPath);
 
     console.log(`📱 应用名称: ${config.appName}`);
-    console.log(`📝 标语: ${config.tagline}`);
-    console.log(`📸 截图数: ${config.screens.length}`);
     console.log(`🎬 宽高比: ${config.output.join(", ")}`);
     console.log(`⏱️  视频时长: ${config.duration}秒`);
 
@@ -47,10 +45,15 @@ async function main() {
     // Remotion 的 <Img> 组件可以直接加载远程图片
     console.log("\n✅ 使用远程图片 URL（无需下载）");
 
+    // 将处理后的完整配置保存到输出目录中，供 Remotion 使用
+    // 这样可以复用已验证和填充默认值后的配置，而不是每次都重新处理原始配置
+    const processedConfigPath = path.join(outputDir, ".processed-config.json");
+    fs.writeFileSync(processedConfigPath, JSON.stringify(config, null, 2));
+
     // 执行渲染
     console.log("\n🎨 开始渲染视频...");
     const renderResults = await renderAppVideoWithCLI(config, {
-      configPath,
+      configPath: processedConfigPath, // 使用处理后的配置文件
       outputDir,
       qualities: "high",
       codec: "h264",
@@ -66,6 +69,11 @@ async function main() {
           preset: "medium",
         });
       }
+    }
+
+    // 清理处理后的配置文件
+    if (fs.existsSync(processedConfigPath)) {
+      fs.unlinkSync(processedConfigPath);
     }
 
     // 输出摘要
@@ -105,9 +113,7 @@ function printHelp() {
 配置文件格式 (JSON):
   {
     "appName": "应用名称",
-    "tagline": "应用标语",
-    "features": ["特性1", "特性2", "特性3"],
-    "screens": ["截图URL1", "截图URL2", "截图URL3"],
+    "icon": "应用图标URL",
     "qr": "二维码URL",
     "theme": {
       "brandColor": "#3B82F6",

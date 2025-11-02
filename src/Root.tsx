@@ -7,10 +7,7 @@ import { AppVideoConfig } from "./config/schema.js";
 const DEFAULT_CONFIG: AppVideoConfig = {
   appName: "示例应用",
   icon: "",
-  tagline: "示例应用标语",
-  screens: [],
   qr: "",
-  features: ["功能1", "功能2", "功能3"],
   fps: 30,
   duration: 8,
   output: ["9x16", "1x1", "16x9"],
@@ -25,8 +22,19 @@ interface RootProps {
 
 export const Root: React.FC<RootProps> = () => {
   // 从 Remotion 的 inputProps 中获取配置
-  const inputProps = getInputProps() as { config?: AppVideoConfig } | null;
-  const config = inputProps?.config || DEFAULT_CONFIG;
+  // 支持两种格式：直接的配置对象，或包装在 config 属性中的对象
+  const inputProps = getInputProps() as (AppVideoConfig | { config?: AppVideoConfig }) | null;
+  
+  let config: AppVideoConfig;
+  if (inputProps && 'config' in inputProps && inputProps.config) {
+    // 格式: { config: {...} }
+    config = inputProps.config;
+  } else if (inputProps && 'appName' in inputProps) {
+    // 格式: {...} (直接的配置对象)
+    config = inputProps as AppVideoConfig;
+  } else {
+    config = DEFAULT_CONFIG;
+  }
   
   const aspects: Array<"9x16" | "1x1" | "16x9"> = ["9x16", "1x1", "16x9"];
 

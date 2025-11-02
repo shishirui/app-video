@@ -34,9 +34,6 @@ export function createDefaultConfig(): AppVideoConfig {
   return {
     appName: "My App",
     icon: "",
-    tagline: "Amazing features await",
-    features: ["Feature 1", "Feature 2", "Feature 3"],
-    screens: [],
     qr: "",
     locale: "zh-CN",
     output: ["9x16", "1x1", "16x9"],

@@ -31,17 +31,14 @@ export async function generateAppPromotionVideos(
   const config = await loadConfig(configPath);
 
   console.log(`📱 生成视频: ${config.appName}`);
-  console.log(`  📝 标语: ${config.tagline}`);
-  console.log(`  📸 截图: ${config.screens.length} 张`);
   console.log(`  🎬 宽高比: ${config.output.join(", ")}`);
 
   // 2. 下载远程资源
   console.log("\n📥 下载资源...");
-  const urls = [...config.screens, config.qr];
+  const urls = [config.qr].filter(Boolean);
   const imageMap = await downloadImages(urls);
 
   // 更新配置为本地路径
-  config.screens = config.screens.map((url) => imageMap.get(url) || url);
   config.qr = imageMap.get(config.qr) || config.qr;
 
   // 3. 渲染视频
@@ -78,12 +75,7 @@ export async function customVideoGeneration(): Promise<void> {
   // 创建配置
   const config = createDefaultConfig();
   config.appName = "My Awesome App";
-  config.tagline = "Amazing experience";
-  config.screens = [
-    "./local/screenshot1.png",
-    "./local/screenshot2.png",
-    "./local/screenshot3.png",
-  ];
+  config.icon = "./local/icon.png";
   config.qr = "./local/qr.png";
 
   // 验证配置

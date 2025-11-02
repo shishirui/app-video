@@ -24,12 +24,13 @@ export const RemotionRoot: React.FC<{ config?: any; aspectRatio?: string }> = ({
             defaultProps={{
               config: config || {
                 appName: "Test App",
-                tagline: "Test Tagline",
-                screens: [],
+                icon: "",
                 qr: "",
-                features: ["Feature 1", "Feature 2", "Feature 3"],
                 fps: 30,
                 duration: 8,
+                locale: "zh-CN",
+                output: ["9x16", "1x1", "16x9"],
+                voiceover: false,
               },
               aspectRatio: aspect,
             }}

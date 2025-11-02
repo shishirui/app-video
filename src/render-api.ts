@@ -51,16 +51,16 @@ export async function renderAppVideoWithCLI(
       const entryFile = path.join(process.cwd(), "dist", "index-entry.js");
       const compositionId = `AppPromotionVideo-${aspectRatio}`;
       
-      // 将配置保存到临时文件并通过 --props 传递
-      const tempConfigFile = path.join(process.cwd(), ".temp-config.json");
-      const inputProps = { config };
-      fs.writeFileSync(tempConfigFile, JSON.stringify(inputProps));
+      // 使用已处理的配置文件（在 cli.ts 中通过 loadConfig 验证和填充了默认值）
+      // 由于 Remotion 的 --props 只接受文件路径，我们需要将处理后的完整配置写入文件
+      // 这样可以确保 Remotion 获取的是经过验证和填充默认值后的配置
+      const propsConfigPath = path.resolve(options.configPath);
       
       const command = [
         "npx remotion render",
         entryFile,
         compositionId,
-        `--props="${tempConfigFile}"`,
+        `--props="${propsConfigPath}"`,
         `--codec=${options.codec || "h264"}`,
         `--crf=${crf}`,
         `--pixel-format=yuv420p`,
