@@ -1,19 +1,11 @@
 import React from "react";
-import { Composition, getInputProps } from "remotion";
+import { Composition, getInputProps, staticFile } from "remotion";
 import { AppPromotionVideo, getCompositionDimensions } from "./compositions/AppPromotion.js";
 import { AppVideoConfig } from "./config/schema.js";
+import exampleConfig from "../configs/example.json";
 
-// 默认配置 
-const DEFAULT_CONFIG: AppVideoConfig = {
-  appName: "示例应用",
-  icon: "",
-  qr: "",
-  fps: 30,
-  duration: 8,
-  output: ["9x16", "1x1", "16x9"],
-  locale: "zh-CN",
-  voiceover: false,
-};
+// 从 example.json 读取默认配置
+const DEFAULT_CONFIG: AppVideoConfig = exampleConfig as AppVideoConfig;
 
 interface RootProps {
   config?: AppVideoConfig;
