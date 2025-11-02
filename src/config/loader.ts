@@ -41,9 +41,5 @@ export function createDefaultConfig(): AppVideoConfig {
     voiceover: false,
     duration: 8,
     fps: 30,
-    theme: {
-      brandColor: "#3B82F6",
-      backgroundColor: "#FFFFFF",
-    },
   };
 }

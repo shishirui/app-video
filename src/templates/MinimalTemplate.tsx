@@ -63,15 +63,14 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({
     }
   );
 
-  const theme = config.theme || {
-    brandColor: "#3B82F6",
-    backgroundColor: "#FFFFFF",
-  };
+  // 简约模板的固定颜色方案
+  const brandColor = "#3B82F6";
+  const backgroundColor = "#FFFFFF";
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: backgroundColor,
         fontFamily: "'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif",
       }}
     >
@@ -83,7 +82,7 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({
           left: 0,
           right: 0,
           bottom: 0,
-          background: `linear-gradient(180deg, ${theme.backgroundColor} 0%, ${theme.brandColor}10 100%)`,
+          background: `linear-gradient(180deg, ${backgroundColor} 0%, ${brandColor}10 100%)`,
         }}
       />
 
@@ -128,7 +127,7 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({
             <div
               style={{
                 textAlign: "center",
-                color: theme.brandColor,
+                color: brandColor,
                 fontSize: "48px",
                 fontWeight: "bold",
               }}
@@ -228,7 +227,7 @@ export const MinimalTemplate: React.FC<TemplateProps> = ({
           <p
             style={{
               fontSize: Math.min(width * 0.055, 28),
-              color: theme.brandColor,
+              color: brandColor,
               fontWeight: "600",
               margin: 0,
             }}

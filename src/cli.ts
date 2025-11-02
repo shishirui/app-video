@@ -115,16 +115,15 @@ function printHelp() {
     "appName": "应用名称",
     "icon": "应用图标URL",
     "qr": "二维码URL",
-    "theme": {
-      "brandColor": "#3B82F6",
-      "backgroundColor": "#FFFFFF"
-    },
+    "template": "default",
     "locale": "zh-CN",
     "output": ["9x16", "1x1", "16x9"],
     "voiceover": false,
     "duration": 8,
     "fps": 30
   }
+  
+模板选项: "default" | "minimal" | "modern"
 
 更多信息: https://github.com/yourusername/app-video-generator
   `);

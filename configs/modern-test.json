@@ -2,10 +2,6 @@
   "appName": "Modern App",
   "icon": "https://tubepip.com/static/images/logo.webp",
   "qr": "https://www.pgyer.com/app/qrcode/oooplay",
-  "theme": {
-    "brandColor": "#FF6B6B",
-    "backgroundColor": "#FFFFFF"
-  },
   "template": "modern",
   "locale": "zh-CN",
   "output": ["9x16"],

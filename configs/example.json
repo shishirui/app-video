@@ -2,10 +2,6 @@
   "appName": "Tube PiP",
   "icon": "https://tubepip.com/static/images/logo.webp",
   "qr": "https://www.pgyer.com/app/qrcode/oooplay",
-  "theme": {
-    "brandColor": "#3B82F6",
-    "backgroundColor": "#FFFFFF"
-  },
   "template": "minimal",
   "locale": "zh-CN",
   "output": ["9x16", "1x1", "16x9"],

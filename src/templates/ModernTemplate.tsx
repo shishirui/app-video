@@ -85,10 +85,8 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
     }
   );
 
-  const theme = config.theme || {
-    brandColor: "#3B82F6",
-    backgroundColor: "#FFFFFF",
-  };
+  // 现代模板的固定颜色方案 - 使用红色系霓虹风格
+  const brandColor = "#FF6B6B";
 
   return (
     <AbsoluteFill
@@ -107,7 +105,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
           bottom: 0,
           background: `
             linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%),
-            radial-gradient(circle at 30% 40%, ${theme.brandColor}20 0%, transparent 60%)
+            radial-gradient(circle at 30% 40%, ${brandColor}20 0%, transparent 60%)
           `,
         }}
       />
@@ -130,7 +128,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             left: `${width * 0.1}px`,
             width: `${width * 0.3}px`,
             height: "3px",
-            background: theme.brandColor,
+            background: brandColor,
             borderRadius: "2px",
           }}
         />
@@ -142,7 +140,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             right: `${width * 0.1}px`,
             width: `${width * 0.25}px`,
             height: "3px",
-            background: theme.brandColor,
+            background: brandColor,
             borderRadius: "2px",
           }}
         />
@@ -170,10 +168,10 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             height: `${width * 0.4}px`,
             borderRadius: `${width * 0.09}px`,
             overflow: "hidden",
-            border: `3px solid ${theme.brandColor}`,
+            border: `3px solid ${brandColor}`,
             boxShadow: `
-              0 0 30px ${theme.brandColor}60,
-              0 0 60px ${theme.brandColor}30,
+              0 0 30px ${brandColor}60,
+              0 0 60px ${brandColor}30,
               0 20px 40px rgba(0, 0, 0, 0.5)
             `,
             display: "flex",
@@ -195,7 +193,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             <div
               style={{
                 textAlign: "center",
-                color: theme.brandColor,
+                color: brandColor,
                 fontSize: "52px",
                 fontWeight: "bold",
               }}
@@ -224,14 +222,14 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
           style={{
             fontSize: Math.min(width * 0.13, 76),
             fontWeight: "800",
-            background: `linear-gradient(135deg, ${theme.brandColor} 0%, #ffffff 100%)`,
+            background: `linear-gradient(135deg, ${brandColor} 0%, #ffffff 100%)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             margin: 0,
             lineHeight: 1.2,
             letterSpacing: "-0.03em",
-            textShadow: `0 0 40px ${theme.brandColor}40`,
+            textShadow: `0 0 40px ${brandColor}40`,
           }}
         >
           {config.appName}
@@ -262,9 +260,9 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             padding: `${width * 0.03}px`,
             backgroundColor: "#2a2a2a",
             borderRadius: `${width * 0.04}px`,
-            border: `2px solid ${theme.brandColor}`,
+            border: `2px solid ${brandColor}`,
             boxShadow: `
-              0 0 20px ${theme.brandColor}50,
+              0 0 20px ${brandColor}50,
               0 10px 30px rgba(0,0,0,0.5)
             `,
             display: "flex",
@@ -314,11 +312,11 @@ export const ModernTemplate: React.FC<TemplateProps> = ({
             alignItems: "center",
             gap: "10px",
             padding: "10px 28px",
-            background: `linear-gradient(135deg, ${theme.brandColor} 0%, ${theme.brandColor}CC 100%)`,
+            background: `linear-gradient(135deg, ${brandColor} 0%, ${brandColor}CC 100%)`,
             borderRadius: "8px",
-            border: `1px solid ${theme.brandColor}`,
+            border: `1px solid ${brandColor}`,
             boxShadow: `
-              0 0 20px ${theme.brandColor}60,
+              0 0 20px ${brandColor}60,
               0 5px 15px rgba(0,0,0,0.4)
             `,
           }}

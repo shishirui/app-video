@@ -98,11 +98,8 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
     }
   );
 
-  // 使用从 useVideoConfig 获取的实际视频尺寸，而不是硬编码
-  const theme = config.theme || {
-    brandColor: "#3B82F6",
-    backgroundColor: "#FFFFFF",
-  };
+  // 默认模板的固定颜色方案
+  const brandColor = "#3B82F6";
 
   return (
     <AbsoluteFill
@@ -120,7 +117,7 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
           right: 0,
           bottom: 0,
           background: `
-            radial-gradient(circle at 20% 30%, ${theme.brandColor}40 0%, transparent 50%),
+            radial-gradient(circle at 20% 30%, ${brandColor}40 0%, transparent 50%),
             radial-gradient(circle at 80% 70%, #8B5CF640 0%, transparent 50%),
             radial-gradient(circle at 50% 50%, #EC489940 0%, transparent 70%),
             linear-gradient(135deg, #0F0F1E 0%, #1a1a2e 100%)
@@ -137,8 +134,8 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
           right: 0,
           bottom: 0,
           backgroundImage: `
-            linear-gradient(${theme.brandColor}10 1px, transparent 1px),
-            linear-gradient(90deg, ${theme.brandColor}10 1px, transparent 1px)
+            linear-gradient(${brandColor}10 1px, transparent 1px),
+            linear-gradient(90deg, ${brandColor}10 1px, transparent 1px)
           `,
           backgroundSize: "50px 50px",
           opacity: 0.3,
@@ -167,7 +164,7 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
             width: `${width * 0.5}px`,
             height: `${width * 0.5}px`,
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${theme.brandColor}60 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${brandColor}60 0%, transparent 70%)`,
             filter: "blur(30px)",
             animation: "pulse 2s infinite",
           }}
@@ -188,7 +185,7 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
               0 8px 32px 0 rgba(31, 38, 135, 0.37),
               0 0 0 1px rgba(255, 255, 255, 0.1),
               inset 0 0 20px rgba(255, 255, 255, 0.05),
-              0 30px 80px ${theme.brandColor}40
+              0 30px 80px ${brandColor}40
             `,
             display: "flex",
             alignItems: "center",
@@ -320,10 +317,10 @@ export const DefaultTemplate: React.FC<TemplateProps> = ({
             alignItems: "center",
             gap: "12px",
             padding: "12px 32px",
-            background: `linear-gradient(135deg, ${theme.brandColor} 0%, #8B5CF6 100%)`,
+            background: `linear-gradient(135deg, ${brandColor} 0%, #8B5CF6 100%)`,
             borderRadius: "50px",
             boxShadow: `
-              0 10px 30px ${theme.brandColor}60,
+              0 10px 30px ${brandColor}60,
               0 0 0 1px rgba(255, 255, 255, 0.2),
               inset 0 1px 0 rgba(255, 255, 255, 0.3)
             `,

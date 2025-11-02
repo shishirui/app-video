@@ -47,8 +47,6 @@ npm run generate configs/example.json
 }
 ```
 
-详细的模板文档请查看 [TEMPLATES.md](./TEMPLATES.md)
-
 ## 📂 项目结构
 
 ```
@@ -84,12 +82,7 @@ npm run generate configs/example.json
 本项目提供了可视化的预览和调试界面，可以实时查看视频效果：
 
 ```bash
-npm run preview
-```
-或者使用别名命令：
-
-```bash
-npm run studio
+npx remotion studio src/index.tsx
 ```
 
 在 Studio 中你可以：
